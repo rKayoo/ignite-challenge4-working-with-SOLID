@@ -70,7 +70,7 @@
                       "name": "Ronaldo",
                       "email": "ronaldo@gmail.com",
                       "id": "123124124",
-                      "admin": "true",
+                      "admin": "false",
                       "created_at": "xx/xx/xxxx",
                       "updated_at": "xx/xx/xxxx"
                     }

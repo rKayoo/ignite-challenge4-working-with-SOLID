@@ -1,0 +1,200 @@
+{
+  "openapi": "3.0.0.",
+  "info": {
+    "title": "Challenge 05",
+    "description": "Documentation from challenge 05",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a new user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Ronaldo",
+                  "email": "ronaldo@gmail.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Email already being used"
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "summary": "List all users",
+        "description": "Only admins can access",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "example": {
+                      "name": "Ronaldo",
+                      "email": "ronaldo@gmail.com",
+                      "id": "123124124",
+                      "admin": "true",
+                      "created_at": "xx/xx/xxxx",
+                      "updated_at": "xx/xx/xxxx"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Send information of an user",
+        "description": "User information",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "parameter",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "example": {
+                      "name": "Ronaldo",
+                      "email": "ronaldo@gmail.com",
+                      "id": "123124124",
+                      "admin": "true",
+                      "created_at": "xx/xx/xxxx",
+                      "updated_at": "xx/xx/xxxx"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "example": {
+                      "error": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Make the user an admin",
+        "description": "Change admin status to true",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "parameter",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "example": {
+                      "name": "Ronaldo",
+                      "email": "ronaldo@gmail.com",
+                      "id": "123124124",
+                      "admin": "true",
+                      "created_at": "xx/xx/xxxx",
+                      "updated_at": "xx/xx/xxxx"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "example": {
+                      "error": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
